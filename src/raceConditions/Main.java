@@ -47,7 +47,6 @@ class Transaction {
         this.amount = amount;
     }
 
-    // Other methods as needed...
 }
 
 class FraudDetection implements Runnable {
@@ -73,14 +72,15 @@ class FraudDetection implements Runnable {
 }
 
 public class Main {
-    private static final String ACCOUNT_FILE_PATH = "/Users/nic/IdeaProjects/market/raceConditions/src/account.csv";
-    private static final String TRANSACTION_FILE_PATH = "/Users/nic/IdeaProjects/market/raceConditions/src/transaction.csv";
+    private static final String ACCOUNT_FILE_PATH = "/Users/nic/IdeaProjects/market/Stream/src/raceConditions/account.csv";
+    private static final String TRANSACTION_FILE_PATH = "/Users/nic/IdeaProjects/market/Stream/src/raceConditions/transaction.csv";
     private static final String CSV_DELIMITER = ",";
 
     public static void main(String[] args) {
         List<Account> accounts = readAccountsFromFile(ACCOUNT_FILE_PATH);
         List<Transaction> transactions = readTransactionsFromFile(TRANSACTION_FILE_PATH);
         int numThreads = Runtime.getRuntime().availableProcessors();
+        System.out.println(numThreads);
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
 
         int batchSize = (int) Math.ceil((double) transactions.size() / numThreads);
