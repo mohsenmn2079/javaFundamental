@@ -1,10 +1,13 @@
 package raceConditions;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -12,6 +15,7 @@ class Account {
     int id;
     String name;
     long balance;
+    private final Object lock = new Object(); // Lock for synchronization
 
     public Account(int id, String name, long balance) {
         this.id = id;
@@ -19,21 +23,17 @@ class Account {
         this.balance = balance;
     }
 
-    public synchronized void withdraw(long amount) {
-        balance -= amount;
+    public void withdraw(long amount) {
+        synchronized (lock) {
+            balance -= amount;
+        }
     }
 
-    public synchronized void deposit(long amount) {
-        balance += amount;
+    public void deposit(long amount) {
+        synchronized (lock) {
+            balance += amount;
+        }
     }
-
-    public static Account getAccountById(List<Account> accounts, int id) {
-        return accounts.stream()
-                .filter(account -> account.id == id)
-                .findFirst()
-                .orElse(null);
-    }
-
 }
 
 class Transaction {
@@ -49,11 +49,12 @@ class Transaction {
 
 }
 
+
 class FraudDetection implements Runnable {
-    private final List<Account> accounts;
+    private final Map<Integer, Account> accounts;
     private final List<Transaction> transactions;
 
-    public FraudDetection(List<Account> accounts, List<Transaction> transactions) {
+    public FraudDetection(Map<Integer, Account> accounts, List<Transaction> transactions) {
         this.accounts = accounts;
         this.transactions = transactions;
     }
@@ -61,26 +62,27 @@ class FraudDetection implements Runnable {
     @Override
     public void run() {
         for (Transaction transaction : transactions) {
-            Account fromAccount = Account.getAccountById(accounts, transaction.fromAccount);
-            Account toAccount = Account.getAccountById(accounts, transaction.toAccount);
+            Account fromAccount = accounts.get(transaction.fromAccount);
+            Account toAccount = accounts.get(transaction.toAccount);
             if (fromAccount != null && toAccount != null) {
                 fromAccount.withdraw(transaction.amount);
                 toAccount.deposit(transaction.amount);
+                System.out.println(fromAccount.name + " " + fromAccount.balance);
             }
         }
     }
 }
 
+
 public class Main {
     private static final String ACCOUNT_FILE_PATH = "/Users/nic/IdeaProjects/market/Stream/src/raceConditions/account.csv";
-    private static final String TRANSACTION_FILE_PATH = "/Users/nic/IdeaProjects/market/Stream/src/raceConditions/transaction.csv";
-    private static final String CSV_DELIMITER = ",";
-
+    private static final String TRANSACTION_FILE_PATH = "/Users/nic/IdeaProjects/market/Stream/src/raceConditions/account.csv";
     public static void main(String[] args) {
-        List<Account> accounts = readAccountsFromFile(ACCOUNT_FILE_PATH);
+        Map<Integer, Account> accounts = readAccountsFromFile(ACCOUNT_FILE_PATH);
+
         List<Transaction> transactions = readTransactionsFromFile(TRANSACTION_FILE_PATH);
+
         int numThreads = Runtime.getRuntime().availableProcessors();
-        System.out.println(numThreads);
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
 
         int batchSize = (int) Math.ceil((double) transactions.size() / numThreads);
@@ -92,11 +94,21 @@ public class Main {
             Runnable task = new FraudDetection(accounts, batch);
             executor.submit(task);
         }
+
         executor.shutdown();
     }
 
-    private static List<Account> readAccountsFromFile(String filename) {
-        List<Account> accounts = new ArrayList<>();
+    public static void writeToArray(int[] array, int index, int value) {
+        array[index] = value;
+        System.out.println("Writing " + value + " to index " + index);
+    }
+
+    public static void readFromArray(int[] array, int index) {
+        int value = array[index];
+        System.out.println("Reading " + value + " from index " + index);
+    }
+    private static Map<Integer,raceConditions.Account> readAccountsFromFile(String filename) {
+        Map<Integer,raceConditions.Account> accounts = new HashMap<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             boolean header = false;
@@ -111,7 +123,7 @@ public class Main {
                     int id = Integer.parseInt(parts[0]);
                     String name = parts[1];
                     long balance = parseBalance(parts[2]);
-                    accounts.add(new Account(id, name, balance));
+                    accounts.put(id,new raceConditions.Account(id, name, balance));
                 }
             }
         } catch (IOException e) {
@@ -125,8 +137,8 @@ public class Main {
         return Long.parseLong(balanceStr.replace(",", "").replace("\"",""));
     }
 
-    private static List<Transaction> readTransactionsFromFile(String filename) {
-        List<Transaction> transactions = new ArrayList<>();
+    private static List<raceConditions.Transaction> readTransactionsFromFile(String filename) {
+        List<raceConditions.Transaction> transactions = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filename))) {
             String line;
             boolean headerSkipped = false;
@@ -142,7 +154,7 @@ public class Main {
                     int toAccount = Integer.parseInt(parts[0]);
                     long amount = parseBalance(parts[2]);
 
-                    transactions.add(new Transaction(fromAccount, toAccount, amount));
+                    transactions.add(new raceConditions.Transaction(fromAccount, toAccount, amount));
                 }
             }
         } catch (IOException e) {
@@ -150,4 +162,6 @@ public class Main {
         }
         return transactions;
     }
+
 }
+

@@ -6,6 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="40764b93-ada1-48d3-8eeb-a3fc1145b04a" name="Changes" comment="market task">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/raceConditions/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/raceConditions/Main.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +40,7 @@
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/nic/IdeaProjects/market/Stream/src/predicate&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/nic/IdeaProjects/market/Stream/src/raceConditions&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -50,15 +52,35 @@
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/raceConditions" />
       <recent name="$PROJECT_DIR$/src/predicate" />
       <recent name="$PROJECT_DIR$/src/market" />
       <recent name="$PROJECT_DIR$/src/function" />
       <recent name="$PROJECT_DIR$/src/consumer" />
-      <recent name="$PROJECT_DIR$/src" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/streamApi" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="raceConditions.Main" />
+      <module name="Stream" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="raceConditions.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -71,6 +93,8 @@
       <workItem from="1692018844585" duration="705000" />
       <workItem from="1692025696924" duration="25220000" />
       <workItem from="1692163450096" duration="1059000" />
+      <workItem from="1692338315792" duration="81000" />
+      <workItem from="1692343542272" duration="2640000" />
     </task>
     <task id="LOCAL-00001" summary="practice for predict">
       <option name="closed" value="true" />
