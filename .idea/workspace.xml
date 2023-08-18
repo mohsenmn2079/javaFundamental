@@ -4,20 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40764b93-ada1-48d3-8eeb-a3fc1145b04a" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Stream.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/consumer/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/streamApi/Main.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/streamApi/Sentence.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/streamApi/sample.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/streamApi/stopWord.txt" afterDir="false" />
+    <list default="true" id="40764b93-ada1-48d3-8eeb-a3fc1145b04a" name="Changes" comment="market task">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,11 +70,51 @@
       <updated>1692018843377</updated>
       <workItem from="1692018844585" duration="705000" />
       <workItem from="1692025696924" duration="25220000" />
-      <workItem from="1692163450096" duration="350000" />
+      <workItem from="1692163450096" duration="1059000" />
     </task>
+    <task id="LOCAL-00001" summary="practice for predict">
+      <option name="closed" value="true" />
+      <created>1692164496065</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1692164496065</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add user file for predict package">
+      <option name="closed" value="true" />
+      <created>1692164578060</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1692164578060</updated>
+    </task>
+    <task id="LOCAL-00003" summary="practice for Function">
+      <option name="closed" value="true" />
+      <created>1692164615324</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1692164615324</updated>
+    </task>
+    <task id="LOCAL-00004" summary="market task">
+      <option name="closed" value="true" />
+      <created>1692164797935</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1692164797935</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="practice for predict" />
+    <MESSAGE value="add user file for predict package" />
+    <MESSAGE value="practice for Function" />
+    <MESSAGE value="market task" />
+    <option name="LAST_COMMIT_MESSAGE" value="market task" />
   </component>
 </project>
