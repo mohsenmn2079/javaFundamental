@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -36,18 +37,8 @@ class Account {
     }
 }
 
-class Transaction {
-    int fromAccount;
-    int toAccount;
-    long amount;
+record Transaction(int fromAccount, int toAccount, long amount) {}
 
-    public Transaction(int fromAccount, int toAccount, long amount) {
-        this.fromAccount = fromAccount;
-        this.toAccount = toAccount;
-        this.amount = amount;
-    }
-
-}
 
 
 class FraudDetection implements Runnable {
@@ -62,11 +53,11 @@ class FraudDetection implements Runnable {
     @Override
     public void run() {
         for (Transaction transaction : transactions) {
-            Account fromAccount = accounts.get(transaction.fromAccount);
-            Account toAccount = accounts.get(transaction.toAccount);
+            Account fromAccount = accounts.get(transaction.fromAccount());
+            Account toAccount = accounts.get(transaction.toAccount());
             if (fromAccount != null && toAccount != null) {
-                fromAccount.withdraw(transaction.amount);
-                toAccount.deposit(transaction.amount);
+                fromAccount.withdraw(transaction.amount());
+                toAccount.deposit(transaction.amount());
                 System.out.println(fromAccount.name + " " + fromAccount.balance);
             }
         }
@@ -79,23 +70,35 @@ public class Main {
     private static final String TRANSACTION_FILE_PATH = "/Users/nic/IdeaProjects/market/Stream/src/raceConditions/account.csv";
     public static void main(String[] args) {
         Map<Integer, Account> accounts = readAccountsFromFile(ACCOUNT_FILE_PATH);
-
         List<Transaction> transactions = readTransactionsFromFile(TRANSACTION_FILE_PATH);
 
         int numThreads = Runtime.getRuntime().availableProcessors();
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
 
         int batchSize = (int) Math.ceil((double) transactions.size() / numThreads);
+        List<Callable<Void>> tasks = new ArrayList<>();
+
         for (int i = 0; i < numThreads; i++) {
             int startIndex = i * batchSize;
             int endIndex = Math.min((i + 1) * batchSize, transactions.size());
             List<Transaction> batch = transactions.subList(startIndex, endIndex);
 
-            Runnable task = new FraudDetection(accounts, batch);
-            executor.submit(task);
+            Callable<Void> task = () -> {
+                new FraudDetection(accounts, batch).run();
+                return null;
+            };
+
+            tasks.add(task);
         }
 
-        executor.shutdown();
+        try {
+            executor.invokeAll(tasks);
+        } catch (InterruptedException e) {
+            e.printStackTrace(); // Handle or log the exception as needed
+        } finally {
+            executor.shutdown();
+        }
+
     }
 
     public static void writeToArray(int[] array, int index, int value) {
