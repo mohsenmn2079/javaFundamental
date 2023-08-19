@@ -75,6 +75,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="raceConditions.Main" />
+      <module name="Stream" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="raceConditions.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
@@ -94,7 +107,8 @@
       <workItem from="1692163450096" duration="1059000" />
       <workItem from="1692338315792" duration="81000" />
       <workItem from="1692343542272" duration="3008000" />
-      <workItem from="1692368402224" duration="1580000" />
+      <workItem from="1692368402224" duration="2422000" />
+      <workItem from="1692422787378" duration="4219000" />
     </task>
     <task id="LOCAL-00001" summary="practice for predict">
       <option name="closed" value="true" />
